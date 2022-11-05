@@ -66,5 +66,50 @@
 6. symbol
 
 - 위의 타입들은 리터럴 값으로 primitive타입의 서브타입을 나타낼 수 있음.
-  또는 래퍼객체로 만들 수 있다. ex> new Boolean(true)
+  또는 래퍼객체로 만들 수 있다.
+  ex> new Boolean(true)
 - Typescript의 핵심 primitive는 모두 소문자여야한다.
+
+# 작성자와 사용자의 관점으로 코드 바라보기
+
+### Type System
+
+1. 컴파일러에게 사용하는 타입을 명시적으로 지정하는 시스템
+2. 컴파일러가 자동으로 타입을 추론하는 시스템
+
+- 타입스크립트의 타입 시스템
+
+1. 타입을 명시적으로 지정할 수 있다.
+2. 타입을 명시적으로 지정하지 않으면, 타입스크립트 컴파일러가 자동으로 타입을 추론 !
+
+- 타입이란, 해당 변수가 할 수 있는 일을 결정합니다.
+- 자바스크립트는 함수 사용법에 대한 오해를 야기합니다.
+
+  1. noimplicitAny 옵션을 켜면, 타입을 명시적으로 지정하지 않은 경우, 타입스크립트가 추론 중 'any' 라고 판단하게 되면,
+     컴파일 에러를 발생시켜 명시적으로 지정하도록 유도합니다.
+
+  2. strictNullChecks 옵션을 켜면, 모든 타입에 자동으로 포함되어 있는 'null'과 'undefined'를 제거해줍니다.
+
+- 명시적으로 리턴 타입을 지정해야할까?
+
+  1. noImplicitReturns 옵션을 켜면 함수 내에서 모든 코드가 값을 리턴하지 않으면, 컴파일 에러를 발생시킨다.
+
+- 매개변수가 object가 들어오는 경우
+
+  1. 객체 리터럴로 매개변수에 할당 후 각각의 키 값에 타입을 지정해준다. f7(a : {name: string, age: number}): string {}
+
+- 나만의 타입을 만드는 방법.
+
+  1. interface PersonInterface {
+     name : string;
+     age: number
+     }
+  2. type :PersonTypeAlias = {
+     name : string;
+     age : number;
+     }
+  3. function f8(a: PersonInterface) : string {
+     return `이름은 ${a.name}이고 나이는 ${a.age}입니닷`
+     }
+
+  console.log(f8({name :"lee", age: 38})) // `이름은 lee이고 나이는 38입니닷`
